@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <p class="p1">我是原始数据1</p>
+      <p class="p2">我是原始数据2</p>
+    </div>
+
+    <script>
+      // 订阅器模型
+      let Dep = {
+        // 容器
+        clientList: {},
+        // 添加订阅
+        listen: function (key, fn) {
+          if (!this.clientList[key]) {
+            this.clientList[key] = [];
+          }
+          this.clientList[key].push(fn);
+        },
+        // 发布
+        trigger: function () {
+          let key = Array.prototype.shift.call(arguments),
+            fns = this.clientList[key];
+          if (!fns || fns.length === 0) {
+            return false;
+          }
+          for (let i = 0, fn; (fn = fns[i++]); ) {
+            fn.apply(this, arguments);
+          }
+        },
+      };
+
+      // 数据劫持
+      let dataHijack = function ({ data, tag, datakey, selector }) {
+        let value = "";
+        el = document.querySelector(selector);
+        Object.defineProperty(data, datakey, {
+          get: function () {
+            console.log("value", value);
+            return value;
+          },
+          set: function (val) {
+            value = val;
+            console.log("set", val);
+            // 发布
+            Dep.trigger(tag, val);
+          },
+        });
+
+        // 订阅
+        Dep.listen(tag, function (text) {
+          el.innerHTML = text;
+        });
+      };
+      // test
+      let obj = {};
+      dataHijack({
+        data: obj,
+        tag: "view-1",
+        datakey: "one",
+        selector: ".p1",
+      });
+
+      dataHijack({
+        data: obj,
+        tag: "view-2",
+        datakey: "two",
+        selector: ".p2",
+      });
+
+      // 初始化赋值（1次
+      obj.one = "初始11111";
+      obj.two = "初始22222";
+
+      // 劫持数据，更新者负责重新渲染（多次
+    </script>
+  </body>
+</html>

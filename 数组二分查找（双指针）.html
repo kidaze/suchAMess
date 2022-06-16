@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 二分查找前提：有序、整型数组；无重复元素
+        // 例：给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target
+        // 写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1
+        function binarySearch(arr, target) {
+            let left = 0
+            let right = arr.length - 1
+            while(left <= right) {
+                let mid = left + Math.floor((right - left)/2);
+                if(arr[mid]>target){
+                    right = mid - 1
+                } else if (arr[mid] < target) {
+                    left = mid + 1
+                } else {
+                    return mid
+                }
+            }
+            return -1
+        }
+
+        // 双指针
+        // 给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序。
+        // 示例 1： 输入：nums = [-4,-1,0,3,10] 输出：[0,1,9,16,100] 解释：平方后，数组变为 [16,1,0,9,100]，排序后
+        // 数组变为 [0,1,9,16,100]
+        // 暴力解法
+        function squareSort(arr){
+            if(arr.length===0) {
+                return false
+            }
+            if(arr.length===1){
+                let temp = []
+                temp.push(arr[0] * arr[0])
+                return [...temp]
+            }
+            arr.forEach(function(ele,index){
+                arr[index] = ele * ele
+            })
+            return arr.sort((a,b)=>a-b)
+        }
+        // 除了常规暴力解法还可以使用双指针
+
+        function squareSortOptimize(arr) {
+            if(arr.length===0) {
+                return false
+            }
+            if(arr.length===1){
+                let temp = []
+                temp.push(arr[0] * arr[0])
+                return [...temp]
+            }
+            let res = []
+            let left = 0 
+            let right = arr.length - 1
+            let resIndex = arr.length - 1
+            while(resIndex>=0){
+                // [-4,-1,0,1,10] [16,100]
+                if(arr[left]*arr[left] > arr[right]*arr[right]){
+                    res[resIndex] = arr[left]*arr[left]
+                    resIndex--
+                    left++
+                } else {
+                    res[resIndex] = arr[right] * arr[right]
+                    right--
+                    resIndex--
+                }
+            }
+            return res
+        }
+
+    </script>
+</body>
+</html>

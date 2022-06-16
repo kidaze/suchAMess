@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box2 {
+        width: 200px;
+        height: 200px;
+        margin-top: 10px;
+        border: 1px solid pink;
+      }
+    </style>
+  </head>
+  <body>
+    <input placeholder="请输入" class="box1" />
+    <div class="box2">click me</div>
+    <script>
+      function demo1() {
+        console.log("111");
+      }
+      function demo2() {
+        console.log("222");
+      }
+
+      // 防抖（将多次操作集中变一次
+      function debounce(fn, wait) {
+        let timeout = null;
+        return function () {
+          if (timeout) clearTimeout(timeout);
+          timeout = setTimeout(fn, wait);
+        };
+      }
+
+      // 节流（一段时间内只会执行一次
+      function throttle(fn, wait) {
+        let timeout = null;
+        return function () {
+          if (!timeout) {
+            timeout = setTimeout(function () {
+              fn();
+              timeout = null;
+            }, wait);
+          }
+        };
+      }
+
+      let box1 = document.querySelector(".box1");
+      let box2 = document.querySelector(".box2");
+
+      box1.addEventListener("input", debounce(demo1, 2000));
+      box2.addEventListener("click", throttle(demo2, 2000));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. 创建一个记录学生成绩的对象，提供一个添加成绩的方法，以及一个显示学生平均成绩 的方法。 
+        function studentGrades() {
+            this.grades = []
+            this.add = add
+            this.averageGrade = averageGrade
+        }
+
+        function add(grade) {
+            this.grades.push(grade)
+        }
+
+        function averageGrade(){
+            let average = 0
+            for(let i = 0;i < this.grades.length;i++){
+                average += this.grades[i]
+            }
+            return (average/this.grades.length).toFixed(2)
+        }
+        // 2. 将一组单词存储在一个数组中，并按正序和倒序分别显示这些单词。 
+        // 正序
+        function sortWord(arr) {
+            return arr.sort().reverse()
+        }
+        // 倒序
+        function reverseWord(arr) {
+            return arr.sort().reverse()
+        }
+        // 3. 修改本章前面出现过的 weeklyTemps 对象，使它可以使用一个二维数组来存储每月的有用数据
+        function weeklyTemps() {
+            this.data = []
+            this.addTem = addTem
+            this.average = average
+        }
+
+        function addTem(week,tem) {
+            this.data[week]
+        }
+
+        // 增加一些方法用以显示月平均数、具体某一周平均数和所有周的平均数。 
+        // 4. 创建这样一个对象，它将字母存储在一个数组中，并且用一个方法可以将字母连在一起，显示成一个单词。
+        function alpObj() {
+            this.dataArr = []
+            this.addArr = addArr
+            this.join = join
+        }
+
+        function addArr(a) {
+            this.dataArr.push(a)
+        }
+
+        function join() {
+            return this.dataArr.join('')
+        }
+
+    </script> 
+</body>
+</html>

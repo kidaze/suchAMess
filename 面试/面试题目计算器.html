@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #test{
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="test">睡不醒睡不醒</div>
+    <script>
+        // 实现一个累乘函数、能做到缓存已经计算过的结果吗、缓存还能如何优化
+        // 缓存 obj map
+        function multi() {
+            let argu = Array.from(arguments).sort()
+            let arguStr = argu.toString()
+            if(arguments.length===0){
+                return
+            }
+            if(sessionStorage.getItem(arguStr)){
+                console.log('这是缓存')
+                return sessionStorage.getItem(arguStr)
+            }
+            let res = 1
+            while(argu.length!==0){
+                res *= argu.pop()
+            }
+            sessionStorage.setItem(arguStr,res)
+            return res
+        }
+    </script>
+</body>
+</html>

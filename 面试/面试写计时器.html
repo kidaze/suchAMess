@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计时器</title>
+    <style>
+        .time{
+            width: 500px;
+            height: 500px;
+            border: 1px solid red;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #screen{
+            width: 300px;
+            height: 100px;
+            border: 1px solid green;
+            text-align: center;
+            font-size: 20px;
+            line-height: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .screen {
+            border: 1px solid purple;
+            margin: 5px;
+            height: 60px;
+            width: 60px;
+            text-align: center;
+            line-height: 60px;
+        }
+
+        button{
+            width: 100px;
+            height: 50px;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="screen">
+        <div id="hour" class="screen">0</div>:
+        <div id="min" class="screen">0</div>:
+        <div id="sec" class="screen">0</div>
+    </div>
+
+    <div class="timer">
+        <button onclick="startTimer()" id="startBtn">start</button>
+        <button onclick="stopTimer()" id="stopBtn" disabled>stop</button>
+        <button onclick="resetTimer()">reset</button>
+    </div>
+    <script>
+        i = 1
+        function startTimer(){
+            document.getElementById('startBtn').disabled = true
+            document.getElementById('stopBtn').disabled = false
+            counting = setInterval(function(){
+                let a = i
+                document.getElementById('sec').innerHTML = a%60
+                document.getElementById('min').innerHTML = Math.floor(a/60)
+                document.getElementById('hour').innerHTML = Math.floor(a/3600)
+                i++
+            },1000)
+        }
+
+        function stopTimer(){
+            clearInterval(counting)
+            document.getElementById('startBtn').disabled = false
+            document.getElementById('stopBtn').disabled = true
+        }
+
+        function resetTimer() {
+            clearInterval(counting)
+            i = 1
+            document.getElementById('sec').innerHTML = 0
+            document.getElementById('min').innerHTML = 0
+            document.getElementById('hour').innerHTML = 0
+            document.getElementById('startBtn').disabled = false
+            document.getElementById('stopBtn').disabled = true
+        }
+
+        // 其他面试题，估计是考打印什么
+        function createIncrement(){
+            let count = 0;
+            function increment(){
+                count++
+                console.log('count',count)
+            }
+            let message = `count is ${count}`
+            function log(){
+                console.log(message)
+            }
+            console.log([increment,log])
+            return [increment,log]
+            
+        }
+
+        const [increment,log] = createIncrement()
+        increment()
+        increment()
+        increment()
+        log()
+        
+    </script>
+</body>
+</html>
