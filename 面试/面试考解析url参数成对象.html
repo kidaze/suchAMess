@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>解析url参数，以对象形式返回</title>
+  </head>
+  <body>
+    <script>
+      function parseUrl(url) {
+        let urlStr = new URL(url).search
+        const res = {}
+        const paramArr = new URLSearchParams(urlStr)
+        paramArr.forEach((val, key) => {
+          res[key] = val
+        })
+        return res;
+      }
+      console.log('test',parseUrl('http://www.123.com?id=123&name=ryan'))
+    </script>
+  </body>
+</html>

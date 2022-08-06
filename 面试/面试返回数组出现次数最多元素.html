@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>return the most frequent ele appears in array</title>
+</head>
+<body>
+    <script>
+        function getMost (arr) {
+            if(arr.length<1||!arr) return false
+            if(arr.length==1){
+                return arr[0]
+            }
+            var tempObj = {}
+            let maxNum
+            let maxCount = 1
+            arr.forEach((val,key)=>{
+                if(!tempObj[val]){
+                    tempObj[val] = 1
+                } else {
+                    tempObj[val] +=1
+                    if(tempObj[val]>maxCount){
+                        maxCount = tempObj[val]
+                        maxNum = val
+                    }
+                }
+            })
+            console.log('出现次数的数字是？ ',maxNum)
+            console.log('一共出现了？ ',maxCount+'次')
+            return maxNum
+        }
+        console.log('test',getMost([1,2,3,3,3,3,4,3,2,1,1,7,5,3,3,2,2,1,1,1,1,1]))
+    </script>
+</body>
+</html>

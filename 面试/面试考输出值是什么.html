@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>应该是考察作用域或者箭头函数…之类？</title>
+</head>
+<body>
+    <script>
+        var a = 1
+        let o = {
+            a: 2,
+            b: {
+                a: 3,
+                fn: function () {
+                    console.log(this.a)
+                },
+                fn2: ()=>{
+                    console.log(this.a)
+                },
+                fn3: function () {
+                    return ()=>{
+                        console.log(this.a)
+                    }
+                }
+            }
+        }
+
+        o.b.fn()
+        var func = o.b.fn
+        func()
+        o.b.fn2()
+        o.b.fn3()()
+    </script>
+</body>
+</html>
