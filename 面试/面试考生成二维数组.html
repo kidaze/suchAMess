@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>输入两个参数生成相应二维数组</title>
+</head>
+<body>
+    <script>
+    // 输入两个数字，返回以下格式数组
+    // 3, 4
+    // [[1,2,3,4], [5,6,7,8],[9,10,11,12]]
+    // 应该是考察生成二维数组比较多吧
+    function create2demArray(num1,num2) {
+        let tempNum = 1
+        let a = new Array()
+        for(let i = 0 ; i < num1 ; i++) {
+            a[i]=new Array()
+            for (let j = 0 ; j < num2; j++) {
+                a[i][j] = tempNum
+                tempNum++
+            }
+        }
+        console.log('a?',a)
+        return a
+    }
+    </script>
+</body>
+</html>
