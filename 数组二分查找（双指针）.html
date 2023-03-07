@@ -16,6 +16,9 @@
             let right = arr.length - 1
             while(left <= right) {
                 let mid = left + Math.floor((right - left)/2);
+                console.log('left',left)
+                console.log('right',right)
+                console.log('mid',mid)
                 if(arr[mid]>target){
                     right = mid - 1
                 } else if (arr[mid] < target) {
@@ -28,9 +31,11 @@
         }
 
         // 双指针
+        // * 非递减顺序排列即是指:数列递减,但不是单调递减,中间可以有重复。 比如:8,6,6,3,2,1. 1,2,3,4,5:递增排列, 9,8,7,6,5:递减排列。
         // 给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序。
         // 示例 1： 输入：nums = [-4,-1,0,3,10] 输出：[0,1,9,16,100] 解释：平方后，数组变为 [16,1,0,9,100]，排序后
         // 数组变为 [0,1,9,16,100]
+        
         // 暴力解法
         function squareSort(arr){
             if(arr.length===0) {
